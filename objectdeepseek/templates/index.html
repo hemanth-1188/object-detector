@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Object Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-eye"></i>
+                <h1>Real-Time Object Detection</h1>
+            </div>
+            <p class="subtitle">Powered by YOLOv8 AI Model</p>
+        </header>
+
+        <main class="main-content">
+            <div class="video-container">
+                <div class="video-header">
+                    <h2><i class="fas fa-video"></i> Live Detection Feed</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span class="status-text">Live</span>
+                    </div>
+                </div>
+                <div class="video-wrapper">
+                    <img src="{{ url_for('video_feed') }}" class="video-feed" alt="Live Object Detection">
+                    <div class="video-overlay">
+                        <div class="detection-count">
+                            <i class="fas fa-object-group"></i>
+                            <span>Objects Detected: <span id="object-count">0</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-controls">
+                    <button class="btn control-btn" id="fullscreen-btn">
+                        <i class="fas fa-expand"></i> Fullscreen
+                    </button>
+                    <button class="btn control-btn" id="snapshot-btn">
+                        <i class="fas fa-camera"></i> Take Snapshot
+                    </button>
+                    <div class="fps-counter">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>FPS: <span id="fps">--</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Model</h3>
+                    <p class="info-text">YOLOv8 Nano</p>
+                    <p class="info-desc">Fast and accurate real-time object detection</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <h3>Detection Classes</h3>
+                    <p class="info-text">80+ Objects</p>
+                    <p class="info-desc">People, vehicles, animals, furniture and more</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Performance</h3>
+                    <p class="info-text">Real-time</p>
+                    <p class="info-desc">Processes up to 30 FPS on standard hardware</p>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+                <ol>
+                    <li>The AI model analyzes each video frame in real-time</li>
+                    <li>Detected objects are outlined with bounding boxes</li>
+                    <li>Labels show the object type and confidence score</li>
+                    <li>Results update continuously as objects move</li>
+                </ol>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Object Detection System &copy; 2023 | Built with Flask, OpenCV, and YOLOv8</p>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fas fa-book"></i> Documentation</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Snapshot Modal -->
+    <div class="modal" id="snapshot-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-camera"></i> Snapshot Captured</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="snapshot-image" src="" alt="Snapshot">
+                <p>Snapshot saved to downloads folder</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="download-btn">Download Image</button>
+                <button class="btn btn-secondary" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
